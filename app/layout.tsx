@@ -1,8 +1,8 @@
 
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Header from '../Component/Header'
-import Boxitem from '../Component/Boxitem'
+import Header from '../src/component/Header'
+import Boxitem from '../src/component/Boxitem'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({

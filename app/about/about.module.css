@@ -1,0 +1,14 @@
+.title {
+     margin: 1rem;
+}
+.description {
+     margin-right: 2.5rem;
+}
+.about {
+     padding: 1rem;
+     border: 1px solid #111;
+     background-color: beige;
+     width: 80%;
+     margin: 1rem auto;
+
+}
