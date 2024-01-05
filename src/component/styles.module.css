@@ -1,0 +1,28 @@
+.inputbtn{
+     transition: all 0.5s;
+     background-color: rgb(31, 29, 29);
+     border-radius: 20px;
+     color: azure;
+     padding: 0.25rem 1.2rem;
+     cursor: pointer;
+
+}
+.inputbtn:hover{
+     background-color: blue;
+     color: #fff;
+}
+.loginbtn{
+     margin: 0 0.75rem;
+     background-color: #fff;
+     border: 2px solid;
+     border-color: rgb(39, 37, 37);
+     color: black;
+     padding: 0.25rem 1.2rem;
+     border-radius: 20px;
+     cursor: pointer;
+     transition: all 0.5s;
+}
+.loginbtn:hover{
+     background-color: blue;
+     color: #fff;
+}
