@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function page() {
   return (
-    <div className="form-body" dir="rtl">
+    <div className="form-body mt-10" dir="rtl">
     <div className="form-control">
       <h2 className="form-title">تقاضای همکاری</h2>
       <form action="/action_page.php">

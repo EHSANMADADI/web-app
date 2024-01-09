@@ -6,32 +6,13 @@ import { FaQuestion } from "react-icons/fa";
 import { IoPerson } from "react-icons/io5";
 export default function Boxitem() {
   return (
-    <div className="flex mx-2 justify-center mt-16">
+    <div className="flex mx-2 justify-center mt-16 mb-5">
      <Item title='درباره ما' href='./about' icon={<IoChatbox/>}/>
 
      <Item title='تماس با ما' href='./contact' icon={<MdEmail/>}/>
      <Item title='راهنمای انتخاب سایز کفش' href='./guid' icon={<FaQuestion/>}/>
      <Item title='تقاضای همکاری' href='./person' icon={<IoPerson/>}/>
-
-        
-          
-        
-     
-
-     {/* <Item title='درباره ما' href='/about'>
-     <IoChatbox/>
-     </Item>
-
-     <Item title='درباره ما'>
-     <IoChatbox/>
-     </Item>
-
-
-     <Item title='درباره ما'>
-     <IoChatbox/>
-     </Item> */}
-
-     
+ 
     </div>
   )
 }
