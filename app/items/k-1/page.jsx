@@ -1,13 +1,12 @@
-"use client"
-import React, { useEffect } from 'react'
-import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs'
-import { useState } from 'react';
-import Image from 'next/image'
-import ImageGallery from 'react-image-gallery';
+'use client'
+import React, { useState,useContext,useEffect } from 'react'
 import 'react-image-gallery/styles/css/image-gallery.css';
 import katoni1 from '../../../public/katoni_.jpg'
 import katoni2 from '../../../public/katoni2_.jpg'
 import katoni3 from '../../../public/kotoni3.jpg'
+import Link from 'next/link';
+import { context } from '../../../src/sher-context/context'
+import Swal from 'sweetalert2'
 export default function page() {
      const slides = [katoni1.src, katoni2.src, katoni3.src];
 
@@ -15,6 +14,7 @@ export default function page() {
      const [index1, setIndex1] = useState(1);
      const [color, setColor] = useState('');
      const [size, setSize] = useState('');
+     const [cartItem, setCartItem] = useContext(context);///context
 
      const handelchangcolor = (e) => {
           console.log(e.currentTarget.value);
@@ -35,6 +35,20 @@ export default function page() {
 
           setIndex((index + 1) % slides.length)
           setIndex1((index1 + 1) % slides.length)
+     }
+
+     const handelsubmit = (e) => {
+          e.preventDefault();
+          const product = { title: 'کتانی چرخ دار', Color: { color }, Size: { size }, price: '8500', src: slides[0] } 
+          
+               setCartItem((currState) => {
+                    const out=[...currState, product];
+                    localStorage.setItem('item', JSON.stringify(out))
+                    return out;
+               })
+
+               
+               
      }
 
 
@@ -67,7 +81,7 @@ export default function page() {
 
 
 
-                    <form className='m-5 p-2 space-x-10'>
+                    <form className='m-5 p-2 space-x-10' onSubmit={(e) => (handelsubmit(e))}>
 
                          <p className="m-4">لطفا رنگ مورد نظر خود را انتخاب کنید:</p>
                          <div className='m-5 p-2 space-x-10'>
@@ -88,8 +102,18 @@ export default function page() {
                          <input type="radio" id="size-big" name="size" value="40" onChange={handelchangsize} checked={size === '40'} />
                          <label htmlFor="size-big">40</label>
 
-                         <button class="bg-green-700 block mt-5 text-white p-4 rounded hover:bg-green-400">افزودن به سبد خرید</button>
-
+                         <button class="bg-green-700 text-white p-4 rounded hover:bg-green-400" onClick={() => 
+                         {
+                              (color && size) ?
+                              Swal.fire({
+                                   title: "با موفقیت انجام شد",
+                                   icon: "success"
+                              })
+                              :(0)
+                         }}>افزودن به سبد خرید</button>
+                         <Link href='/'>
+                              <button class="bg-black text-white p-4 inline rounded hover:bg-gray-400"  >  برگشت به خانه </button>
+                         </Link>
                     </form>
                </div>
           </div>

@@ -70,3 +70,70 @@ th {
 tr:nth-child(even) {
      background-color: #dddddd;
 }
+
+
+.footer {
+     padding: 3rem 9rem;
+     display: flex;
+     flex-direction: row-reverse;
+     background-color: rgba(74, 71, 71, 0.678);
+     /* align-items: center; */
+     margin: auto;
+     justify-content: space-between;
+     margin-top: 1.5rem;
+}
+
+.clint-servis ul {
+     list-style-type: none;
+     flex-direction: column;
+     width: 100%;
+     margin: 0;
+     padding: 0 !important;
+     align-items: flex-end;
+
+
+}
+
+.bold {
+     font-weight: 600;
+     margin-bottom: 0.4rem;
+
+}
+
+.w-30 {
+     padding-top: 0.5rem;
+     width: 30%;
+
+}
+
+.Linker {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+}
+
+.Linker h5 {
+     margin-bottom: 0.4rem;
+}
+
+.icon i {
+     cursor: pointer;
+     padding: 0.4rem;
+     font-size: larger;
+     transition: all 0.5s;
+}
+
+.icon i:hover {
+     color: blue;
+}
+
+.about-iframe{
+     display: flex;
+     margin: auto auto;
+     height: 100% !important;
+     border: 0;
+}
+
+.active{
+     border: 1px solid blue;
+}

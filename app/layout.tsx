@@ -1,8 +1,10 @@
-
+'use client'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from '../src/component/Header'
 import { CartProvider } from '../src/sher-context/context'
+import Footer from'../src/component/Footer'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({
@@ -12,17 +14,18 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <CartProvider>
-        <html lang="en">
-          <body className={inter.className}>
-            <Header />
 
+      <html lang="en">
+        <body className={inter.className}>
+          <CartProvider>
+            <Header />
             {children}
 
+          </CartProvider>
+          <Footer />
+        </body>
+      </html>
 
-          </body>
-        </html>
-      </CartProvider>
     </>
 
 

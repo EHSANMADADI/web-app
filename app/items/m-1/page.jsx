@@ -1,28 +1,33 @@
 "use client"
 import React, { useEffect } from 'react'
-import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs'
 import { useState } from 'react';
-import Image from 'next/image'
-import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import man1 from '../../../public/man1.jpg'
 import man2 from '../../../public/man4.jpg'
 import man3 from '../../../public/man3.jpg'
+import { context } from '../../../src/sher-context/context'
+import { useContext } from 'react'
+import Link from 'next/link'
+import Swal from 'sweetalert2'
 
 export default function page() {
      const slides = [man1.src, man2.src, man3.src];
 
      const [index, setIndex] = useState(0);
      const [index1, setIndex1] = useState(1);
-     const [color,setColor]=useState('');
-     const[size,setSize]=useState('');     
+     const [color, setColor] = useState('');
+     const [size, setSize] = useState('');
 
 
-     const handelchangcolor=(e)=>{
+
+     const [cartItem, setCartItem] = useContext(context);///context  
+
+
+     const handelchangcolor = (e) => {
           console.log(e.currentTarget.value);
           setColor(e.currentTarget.value);
      }
-     const handelchangsize=(e)=>{
+     const handelchangsize = (e) => {
           console.log(e.currentTarget.value);
           setSize(e.currentTarget.value);
      }
@@ -37,6 +42,17 @@ export default function page() {
           setIndex1((index1 + 1) % slides.length)
      }
 
+     const handelsubmit = (e) => {
+          e.preventDefault()
+
+          const product = { title: 'کفش مردانه ', Color: { color }, Size: { size }, price: '8500', src: slides[0] }
+          setCartItem((currState) => {
+               const out=[...currState, product];
+               localStorage.setItem('item', JSON.stringify(out))
+               return out;
+          })
+
+     }
 
      return (
           <div>
@@ -63,32 +79,44 @@ export default function page() {
                          <p className="bg-blue-500 py-3 px-4 mx-2 mb-2 w-24 rounded-full text-white"> 850000T</p>
                     </div>
 
-                  
 
-                  
 
-                    <form className='m-5 p-2 space-x-10'>
 
-                    <p className="m-4">لطفا رنگ مورد نظر خود را انتخاب کنید:</p>
-                    <div className='m-5 p-2 space-x-10'>
-                              <input type="radio" id="black" name="color" value="black" required checked={color==='black'}  onChange={handelchangcolor}  />
+
+                    <form className='m-5 p-2 space-x-10' onSubmit={(e)=>(handelsubmit(e))}>
+
+                         <p className="m-4">لطفا رنگ مورد نظر خود را انتخاب کنید:</p>
+                         <div className='m-5 p-2 space-x-10'>
+                              <input type="radio" id="black" name="color" value="black" required checked={color === 'black'} onChange={handelchangcolor} />
                               <label htmlFor='black' >مشکی</label>
-                              <input type="radio" id="white" name="color" value="white" onChange={handelchangcolor}   checked={color==='white'} />
+                              <input type="radio" id="white" name="color" value="white" onChange={handelchangcolor} checked={color === 'white'} />
                               <label htmlFor='white' >سفید</label>
-                              <input type="radio" id="brown" name="color" value="brown" onChange={handelchangcolor}   checked={color==='brown'} />
+                              <input type="radio" id="brown" name="color" value="brown" onChange={handelchangcolor} checked={color === 'brown'} />
                               <label htmlFor='brown' >قهوه ای</label>
                          </div>
 
                          <p className="m-4">لطفا سایز مورد نظر خود را انتخاب کنید:</p>
-                         
-                         <input type="radio" id="size-small" name="size" value="34" required checked={size==='34'} onChange={handelchangsize} />
+
+                         <input type="radio" id="size-small" name="size" value="34" required checked={size === '34'} onChange={handelchangsize} />
                          <label htmlFor="size-small">34</label>
-                         <input type="radio" id="size-medum" name="size" value="38"  onChange={handelchangsize} checked={size==='38'} />
+                         <input type="radio" id="size-medum" name="size" value="38" onChange={handelchangsize} checked={size === '38'} />
                          <label htmlFor="size-medum">38</label>
-                         <input type="radio" id="size-big" name="size" value="40"  onChange={handelchangsize} checked={size==='40'} />
+                         <input type="radio" id="size-big" name="size" value="40" onChange={handelchangsize} checked={size === '40'} />
                          <label htmlFor="size-big">40</label>
 
-                         <button class="bg-green-700 text-white p-4 rounded hover:bg-green-400">افزودن به سبد خرید</button>
+                         <button class="bg-green-700 text-white p-4 rounded hover:bg-green-400" onClick={() => 
+                         {
+                              (color && size) ?
+                              Swal.fire({
+                                   title: "با موفقیت انجام شد",
+                                   icon: "success"
+                              })
+                              :(0)
+                         }}>افزودن به سبد خرید</button>
+                         
+                         <Link href='/'>
+                              <button class="bg-black text-white p-4 inline rounded hover:bg-gray-400"  >  برگشت به خانه </button>
+                         </Link>
 
                     </form>
                </div>

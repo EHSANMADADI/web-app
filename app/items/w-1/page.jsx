@@ -8,8 +8,11 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 import wman1 from '../../../public/woman1.jpg'
 import wman2 from '../../../public/woman2.jpg'
 import wman3 from '../../../public/woman3.jpg'
-
+import Link from 'next/link'
+import Sweetalert from '../../../src/component/sweetalert'
 import { context } from '../../../src/sher-context/context'
+import Swal from 'sweetalert2'
+
 
 
 export default function page() {
@@ -46,12 +49,14 @@ export default function page() {
           setSize(e.currentTarget.value);
      }
 
-     const handelsubmit = () => {
-          const product={title:'کفش زنانه ' ,Color:{color},Size:{size}  ,price:'8500',img:'../../public/woman1.jpg'}
-          setCartItem((currState)=>{
-               return[...currState,product]
+     const handelsubmit = (e) => {
+          e.preventDefault();
+          const product = { title: 'کفش زنانه ', Color: { color }, Size: { size }, price: '8500', src: slides[0] }
+          setCartItem((currState) => {
+               const out=[...currState, product];
+               localStorage.setItem('item', JSON.stringify(out))
+               return out;
           })
-     
      }
 
      return (
@@ -85,7 +90,7 @@ export default function page() {
 
 
 
-                    <div className='m-5 p-2 space-x-10'>
+                    <form className='m-5 p-2 space-x-10' onSubmit={(e) => handelsubmit(e)}>
                          <p className="m-4">لطفا رنگ مورد نظر خود را انتخاب کنید:</p>
                          <div className='m-5 p-2 space-x-10'>
                               <input type="radio" id="black" name="color" value="black" required checked={color === 'black'} onChange={handelchangcolor} />
@@ -105,9 +110,21 @@ export default function page() {
                          <input type="radio" id="size-big" name="size" value="40" onChange={handelchangsize} checked={size === '40'} />
                          <label htmlFor="size-big">40</label>
 
-                         <button class="bg-green-700 text-white p-4 rounded hover:bg-green-400" onClick={handelsubmit} >افزودن به سبد خرید</button>
+                         <button class="bg-green-700 text-white p-4 rounded hover:bg-green-400" onClick={() => 
+                         {
+                              (color && size) ?
+                              Swal.fire({
+                                   title: "با موفقیت انجام شد",
+                                   icon: "success"
+                              })
+                              :(0)
+                         }}>افزودن به سبد خرید</button>
 
-                    </div>
+                         <Link href='/'>
+                              <button class="bg-black text-white p-4 inline rounded hover:bg-gray-400"  >  برگشت به خانه </button>
+                         </Link>
+
+                    </form>
                </div>
           </div>
      );
